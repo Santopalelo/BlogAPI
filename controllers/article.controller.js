@@ -5,14 +5,18 @@ const postArticle = async (req, res, next) => {
   const articleSchema = joi.object({
     title: joi.string().min(5).required(),
     content: joi.string().min(5).required(),
-    author: joi.string().min(5).default("guest").optional(),
+    subtitle: joi.string().min(5).optional(),
   });
   const { error, value } = articleSchema.validate(req.body);
   if (error) {
     return res.status(400).json("please provide title and content");
   }
   try {
-    const newArticle = new articleModel(value);
+    const newArticle = new articleModel({
+      title: req.body.title,
+      content: req.body.content,
+      author: req.user._id
+    });
     await newArticle.save();
 
     res.status(201).json({
@@ -28,7 +32,7 @@ const getAllArticle = async (req, res, next) => {
     const {limit = 10, page = 1} = req.query
     const skip = (page - 1) * limit
   try {
-    const article = await articleModel.find({}).sort({createdAt: -1}).limit(limit).skip(skip);
+    const article = await articleModel.find({}).sort({createdAt: -1}).limit(limit).skip(skip).populate("author", "name _id email");
     return res.status(200).json({
       message: "article fetched",
       data: article,
@@ -62,6 +66,7 @@ const updateArticleById = async (req, res, next) => {
     title: joi.string().min(5).optional(),
     content: joi.string().min(5).optional(),
     author: joi.string().min(5).default("guest").optional(),
+    subtitle: joi.string().min(5).optional(),
   });
   const { error, value } = articleSchema.validate(req.body);
   if (error) {

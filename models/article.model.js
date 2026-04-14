@@ -14,10 +14,14 @@ const articleSchema = mongoose.Schema({
         maxLength: 1000
     },
     author:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
+    subtitle:{
         type: String,
         minLength: 5,
-        maxLength: 50,
-        default: "Guest"
+        maxLength: 100
     }
 },{timestamps: true});
 
