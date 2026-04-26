@@ -1,0 +1,5 @@
+PORT=4000
+
+MONGODB_URI = your mongo uri
+
+JWT_SECRET=your secret key
