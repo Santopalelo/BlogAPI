@@ -1,4 +1,4 @@
-const articleModel = require("../models/article.model.js");
+const articleModel = require("../models/article.model")
 
 const postArticle = async (req, res, next) => {
   const { title, content } = req.body;
@@ -58,11 +58,11 @@ const getArticleById = async (req, res, next) => {
 };
 
 const updateArticleById = async (req, res, next) => {
-  const { title, content, subtitle } = req.body;
+  const { title, content} = req.body;
   try {
     const updateArticle = await articleModel.findByIdAndUpdate(
       req.params.id,
-      { title, content, subtitle },
+      { title, content },
       { new: true, runValidators: true },
     );
     if (!updateArticle) {

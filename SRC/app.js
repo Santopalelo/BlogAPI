@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
 const logRequest = require('./middlewares/logger.js');
 const errorHandler = require('./middlewares/errorHandler.js');
 const articleRoutes = require('./routes/article.route.js');
