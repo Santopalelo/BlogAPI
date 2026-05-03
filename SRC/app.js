@@ -10,8 +10,9 @@ app.use(cors("*"));
 app.use(express.json());
 
 app.use(logRequest);
-app.use("/api", articleRoutes)
+
 app.use("/api/users", userRoutes)
+app.use("/api", articleRoutes)
 
 app.use(errorHandler)
 

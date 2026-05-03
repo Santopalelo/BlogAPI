@@ -23,6 +23,6 @@ const articleSchema = mongoose.Schema({
 articleSchema.index({title: "text", content: "text"})
 
 
-const Article = mongoose.model("Article", articleSchema);
+const articleModel = mongoose.model("Article", articleSchema);
 
-module.exports = Article;
+module.exports = articleModel;
