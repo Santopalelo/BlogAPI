@@ -1,5 +1,4 @@
 const express = require("express");
-const multer = require("multer");
 const upload = require("../middlewares/upload")
 const { registerUser, loginUser } = require("../controllers/user.controller");
 const { validateRegisterUser, validateLoginUser } = require("../validator/user.validator");
@@ -15,5 +14,6 @@ router.post("/upload/avatar", upload.array("avatar", 5), (req, res) =>{
 })
 router.post("/sign-up",validateRegisterUser, registerUser)
 router.post("/login",validateLoginUser, loginUser)
+
 
 module.exports = router
